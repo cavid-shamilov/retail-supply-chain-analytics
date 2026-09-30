@@ -5,11 +5,8 @@ This project analyzes sales performance using Excel, SQL Server, and Power BI to
 ## Tools
 
 • Excel
-
 • SQL Server / SSMS
-
 • Power BI
-
 • PowerPoint
 
 
