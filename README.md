@@ -81,7 +81,7 @@ The analytical workflow in Excel was structured across dedicated interactive Piv
 
 * **Overall Performance:** Evaluated macro-level metrics including Total Revenue, Net Profit, Total Orders, and Average Order Value (AOV) excluding returned transactions.
   
-  ![Overall Performance](Excel/screenshots/overall_performance.png)
+  ![Overall Performance](Excelscreenshotsoverall_performance.png)
 
 * **Time Series Analysis:** Analyzed sales and profit dynamics across yearly, quarterly, and monthly intervals to identify seasonality patterns.
   
