@@ -4,10 +4,9 @@ End-to-end retail supply chain analytics project using SQL (50 queries), Power B
 This project analyzes sales performance using Excel, SQL Server, and Power BI to identify revenue, profitability, product, regional, salesperson, customer, and discount-related trends.
 Tools
 
-<center>
+
 
 • Cavid <br>
 • Elgün <br>
 • Əli
 
-</center>
