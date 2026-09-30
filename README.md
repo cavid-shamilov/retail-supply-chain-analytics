@@ -81,27 +81,27 @@ The analytical workflow in Excel was structured across dedicated interactive Piv
 
 * **Overall Performance:** Evaluated macro-level metrics including Total Revenue, Net Profit, Total Orders, and Average Order Value (AOV) excluding returned transactions.
   
-  ![Overall Performance](Excelscreenshotsoverall_performance.png)
+  ![Overall Performance](Excel_screenshots_overall_performance.png)
 
-* **Time Series Analysis:** Analyzed sales and profit dynamics across yearly, quarterly, and monthly intervals to identify seasonality patterns.
+* **Time Series Analysis:** Analyzed monthly performance dynamics including Total Sales, Month-over-Month (MoM) Sales Growth %, Total Quantity, Distinct Order Count, and Total Profit to identify seasonal peaks (e.g., November as the best month, February as the lowest month).
   
-  ![Time Analysis](Excel/screenshots/time_analysis.png)
+  ![Time Analysis](Excel_screenshots_time_analysis.png)
 
-* **Product Performance:** Segmented revenue and profit margins across categories and sub-categories to isolate key driver products.
+* **Product Performance:** Structured a detailed hierarchical Pivot Table breakdown across main categories and sub-categories, evaluating Total Sales, Quantity Sold, and Net Profit to identify high-margin products alongside loss-making sub-categories (e.g., Tables and Bookcases).
   
-  ![Product Performance](Excel/screenshots/product_performance.png)
+  ![Product Performance](Excel_screenshots_product_performance.png)
 
-* **Regional Dynamics:** Evaluated order volume and regional profit margins to pinpoint underperforming geographical territories.
+* **Regional Dynamics:** Created a multi-level geographic Pivot Table analyzing volume, total revenue, and net profit across Region and State levels to pinpoint top-performing markets (e.g., California) versus unprofitable states (e.g., Arizona, Colorado).
   
-  ![Regional Performance](Excel/screenshots/regional_performance.png)
+  ![Regional Performance](Excel_screenshots_regional_performance.png)
 
-* **Salesperson Performance:** Measured individual sales representative contributions, order volume, and net revenue generation.
+* **Salesperson Performance:** Evaluated individual sales representative performance by aggregating order volume (Distinct Count of Order ID), total revenue generation, and net profit margins to identify top revenue and profit contributors (e.g., Anna Andreadi and Chuck Magee).
   
-  ![Salesperson Performance](Excel/screenshots/salesperson_performance.png)
+  ![Salesperson Performance](Excel_screenshots_salesperson_performance.png)
 
-* **Discount & Profitability:** Cross-examined dynamic discount tiers against profit margins to identify margin erosion and high-discount loss transactions.
+* **Discount & Profitability:** Cross-examined dynamic discount tiers against overall sales and net profit margins, revealing that discount rates exceeding 20% lead to severe profit erosion and negative profitability (e.g., reaching up to -182% margin at 80% discount).
   
-  ![Discount and Profitability](Excel/screenshots/discount_profitability.png)
+  ![Discount and Profitability](Excel_screenshots_discount_profitability.png)
 
 📂 **File Path:** [`Excel/Retail-Supply-Chain-Sales-Dataset(ANALYSIS).xlsx`](Excel/Retail-Supply-Chain-Sales-Dataset(ANALYSIS).xlsx)
 
