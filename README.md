@@ -23,12 +23,12 @@ The project aims to answer key business questions such as:  <br>
 ### Data source 
 This project utilizes the [Retail Supply Chain Sales Dataset](https://www.kaggle.com/datasets/shandeep777/retail-supply-chain-sales-dataset?utm_source=chatgpt.com).
 ### Dataset Size
-• Row Count: 9,994 rows
+• Row Count: 9,994 rows <br>
 • Column Count: 23 columns
 ### Data Grain
 One row represents one order line item.
 ### Key Identifiers
-• Row ID — unique identifier for each row/order line.
+• Row ID — unique identifier for each row/order line. <br>
 • Order ID — identifies the order and can appear multiple times because an order may contain multiple line items.
 ### Main Data Fields
 The dataset contains the following information: <br>
@@ -39,6 +39,9 @@ The dataset contains the following information: <br>
 • Transaction status — Returned <br>
 • Financial metrics — Sales, Discount, Profit <br>
 • Volume — Quantity <br>.
+### Data Dictionary
+For detailed data definitions, view the [Data Dictionary (Word Document)](Data_Dictionary.docx).
+
 
 
 
