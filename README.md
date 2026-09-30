@@ -74,7 +74,7 @@ Beyond basic data hygiene, specific commercial business rules were tested:
 ### 3. Key Excel Data Cleaning & Formatting Actions
 
 * **Data Type Standardization:** Reclassified columns to their correct physical data types in Excel. Notably converted the `Quantity` field from raw `General` text format to standard numeric format to enable proper aggregation, filtering, and mathematical calculations in Pivot Tables.
-
+* **Return Status Handling & Sales Filtering:** Observed that returned orders (`Returned = 'Yes'`) retained their original sales values to indicate historical transaction amount rather than net kept sales. To prevent artificial revenue inflation and ensure accurate performance metrics, all subsequent Excel Pivot Table calculations and SQL models strictly filtered for non-returned orders (`Returned = 'Not'`).
 
 
 
