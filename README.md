@@ -42,13 +42,25 @@ The dataset contains the following information: <br>
 ### Data Dictionary
 For detailed data definitions, view the [Data Dictionary (Word Document)](Data_Dictionary.docx).
 ## Data Quality Assessment & Cleaning
-To ensure the dataset was analytics-ready, the following baseline validations were evaluated: <br>
-1. Data Quality Assessment (Key Questions Asked) <br>
-• Missing & Null Values: Are there any empty or missing critical fields (e.g., Sales, Profit, Order Date, Customer ID)? <br>
-• Duplicate Records: Do duplicate transaction rows or duplicate Order IDs exist? <br>
-• Data Type Consistency: Are numerical fields (Sales, Profit, Quantity) correctly formatted as numeric values, and dates formatted as Standard Date types? <br>
-• Outliers & Anomalies: Are there negative sales values, unrealistic profit margins, or logical errors in order vs. ship dates? <br>
-• Data Integrity & Standard Formatting: Are text fields (e.g., Country, Region, Category) consistent without trailing spaces or case-sensitivity variations? <br>
+### Data Quality Assessment & Business Logic Validation
+
+To ensure data integrity prior to running exploratory analysis, a comprehensive audit was executed across categorical consistency, numerical boundaries, and business rules.
+
+#### 1. Invalid & Inconsistent Value Checks
+* **Categorical Consistency:** Validated unique entries across `Region` and `Category` fields to eliminate typos, trailing spaces, or duplicate representations. Verified that `Returned` status strictly holds binary standard values (e.g., 'Not' / 'Returned').
+* **Numerical Boundary Audit:** Checked `Quantity` for zeros or negative values, ensured `Discount` rate stays strictly within the logical range of 0.00 to 1.00 (0%–100%), and audited `Sales` and `Profit` for anomalies.
+* **Geographical Fields:** Screened `Postal Code` entries for format inconsistencies and missing spatial mappings.
+
+#### 2. Business Logic & Operational Validation
+* **Temporal Logic:** Confirmed that `Ship Date` is strictly equal to or after `Order Date` for all transactions (`Ship Date >= Order Date`).
+* **Commercial Integrity:** Verified logic between `Quantity`, `Sales`, and `Unit Price` to ensure consistent order line items.
+* **Profitability & Discount Dynamics:** Cross-examined high-discount records against profit performance to identify margin erosion and negative-profit patterns.
+* **Return Alignment:** Audited order-level return flags against underlying transactional totals for proper aggregation.
+
+#### 3. Key Excel Data Cleaning & Formatting Actions
+* **Data Type Standardization:** Corrected column formatting issues; notably converted the `Quantity` field from raw `General` text format to standard numeric data type to enable proper aggregation and mathematical calculations in Pivot Tables.
+* **Text Normalization:** Applied string formatting (`TRIM`, Case Normalization) to remove whitespace inconsistencies across customer names and categories.
+* **Numeric Precision:** Formatted all monetary values (`Sales`, `Profit`) to standard two-decimal Currency formats.
 
 
 
