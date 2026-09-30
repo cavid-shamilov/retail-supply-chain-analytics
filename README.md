@@ -44,11 +44,11 @@ For detailed data definitions, view the [Data Dictionary (Word Document)](Data_D
 ## Data Quality Assessment & Cleaning
 To ensure the dataset was analytics-ready, the following baseline validations were evaluated: <br>
 1. Data Quality Assessment (Key Questions Asked) <br>
-**Missing & Null Values:** Are there any empty or missing critical fields (e.g., Sales, Profit, Order Date, Customer ID)? <br>
-**Duplicate Records:** Do duplicate transaction rows or duplicate Order IDs exist? <br>
-**Data Type Consistency:** Are numerical fields (Sales, Profit, Quantity) correctly formatted as numeric values, and dates formatted as Standard Date types? <br>
-**Outliers & Anomalies:** Are there negative sales values, unrealistic profit margins, or logical errors in order vs. ship dates? <br>
-**Data Integrity & Standard Formatting:** Are text fields (e.g., Country, Region, Category) consistent without trailing spaces or case-sensitivity variations? <br>
+• Missing & Null Values:** Are there any empty or missing critical fields (e.g., Sales, Profit, Order Date, Customer ID)? <br>
+• Duplicate Records:** Do duplicate transaction rows or duplicate Order IDs exist? <br>
+• Data Type Consistency:** Are numerical fields (Sales, Profit, Quantity) correctly formatted as numeric values, and dates formatted as Standard Date types? <br>
+• Outliers & Anomalies:** Are there negative sales values, unrealistic profit margins, or logical errors in order vs. ship dates? <br>
+• Data Integrity & Standard Formatting:** Are text fields (e.g., Country, Region, Category) consistent without trailing spaces or case-sensitivity variations? <br>
 
 
 
