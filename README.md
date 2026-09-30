@@ -432,7 +432,7 @@ Different unit prices for the same product were not automatically treated as err
 Profit values were reviewed against Sales to identify logically inconsistent records.
 
 No obvious cases were identified where:
-** Profit was greater than Sales
-** Profit was lower than negative Sales
+**Profit was greater than Sales**
+**Profit was lower than negative Sales**
 
 
