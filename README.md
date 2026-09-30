@@ -19,5 +19,9 @@ The project aims to answer key business questions such as:  <br>
 • How do discount levels affect profitability?  <br>
 • Which customers and customer segments generate the most value?  <br>
 • Which products contribute most to total sales, and what does the Pareto (80/20) analysis reveal?  <br>
+## Dataset
+### Data source 
+This project utilizes the [Retail Supply Chain Sales Dataset](https://www.kaggle.com/datasets/shandeep777/retail-supply-chain-sales-dataset?utm_source=chatgpt.com).
+
 
 
