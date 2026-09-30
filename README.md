@@ -435,5 +435,18 @@ No obvious cases were identified where:
 
 - Profit was greater than Sales
 - Profit was lower than negative Sales
+---
+### 5.8 Outlier Investigation
+
+Potential outliers were reviewed by sorting important numerical fields.
+
+The following fields were investigated:
+
+- Sales
+- Quantity
+- Profit
+
+Large positive and negative Profit values were investigated rather than automatically removed. For example, the lowest observed Profit value was approximately -6,599.98. This record was investigated and had a 70% discount, providing a plausible business explanation for the large loss. Therefore, the record was retained. This follows the principle: An outlier is not automatically an error.
+
 
 
