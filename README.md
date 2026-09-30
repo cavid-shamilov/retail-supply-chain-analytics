@@ -41,7 +41,7 @@ The dataset contains the following information: <br>
 • Volume — Quantity <br>.
 ### Data Dictionary
 For detailed data definitions, view the [Data Dictionary (Word Document)](Data_Dictionary.docx).
-## 🧹 Data Quality Assessment & Cleaning
+## Data Quality Assessment & Cleaning
 
 Prior to conducting dynamic Pivot Table analysis in Excel and executing analytical SQL queries, a systematic **Data Quality Assessment (DQA)** was executed to validate the dataset across the core dimensions of data governance and data cleanliness.
 
@@ -75,6 +75,35 @@ Beyond basic data hygiene, specific commercial business rules were tested:
 
 * **Data Type Standardization:** Reclassified columns to their correct physical data types in Excel. Notably converted the `Quantity` field from raw `General` text format to standard numeric format to enable proper aggregation, filtering, and mathematical calculations in Pivot Tables.
 * **Return Status Handling & Sales Filtering:** Observed that returned orders (`Returned = 'Yes'`) retained their original sales values to indicate historical transaction amount rather than net kept sales. To prevent artificial revenue inflation and ensure accurate performance metrics, all subsequent Excel Pivot Table calculations and SQL models strictly filtered for non-returned orders (`Returned = 'Not'`).
+## Excel Pivot Table Analysis
+
+The analytical workflow in Excel was structured across dedicated interactive Pivot Table sheets to dissect supply chain performance from multiple operational angles:
+
+* **Overall Performance:** Evaluated macro-level metrics including Total Revenue, Net Profit, Total Orders, and Average Order Value (AOV) excluding returned transactions.
+  
+  ![Overall Performance](Excel/screenshots/overall_performance.png)
+
+* **Time Series Analysis:** Analyzed sales and profit dynamics across yearly, quarterly, and monthly intervals to identify seasonality patterns.
+  
+  ![Time Analysis](Excel/screenshots/time_analysis.png)
+
+* **Product Performance:** Segmented revenue and profit margins across categories and sub-categories to isolate key driver products.
+  
+  ![Product Performance](Excel/screenshots/product_performance.png)
+
+* **Regional Dynamics:** Evaluated order volume and regional profit margins to pinpoint underperforming geographical territories.
+  
+  ![Regional Performance](Excel/screenshots/regional_performance.png)
+
+* **Salesperson Performance:** Measured individual sales representative contributions, order volume, and net revenue generation.
+  
+  ![Salesperson Performance](Excel/screenshots/salesperson_performance.png)
+
+* **Discount & Profitability:** Cross-examined dynamic discount tiers against profit margins to identify margin erosion and high-discount loss transactions.
+  
+  ![Discount and Profitability](Excel/screenshots/discount_profitability.png)
+
+📂 **File Path:** [`Excel/Retail-Supply-Chain-Sales-Dataset(ANALYSIS).xlsx`](Excel/Retail-Supply-Chain-Sales-Dataset(ANALYSIS).xlsx)
 
 
 
