@@ -410,5 +410,29 @@ All checked records followed this rule.
 
 No records were identified where a product was shipped before the corresponding order date.
 
+---
+
+### 5.7 Business Logic Validation
+
+Additional relationships between fields were checked to determine whether the data behaved logically from a business perspective.
+
+#### Unit Price
+
+A calculated Unit Price was created:
+
+```text
+Unit Price = Sales / Quantity
+```
+Unit prices were reviewed across products and transactions.
+
+Different unit prices for the same product were not automatically treated as errors because prices can vary between transactions due to factors such as discounts, dates, regions, and sales conditions.
+
+#### Profit and Sales
+
+Profit values were reviewed against Sales to identify logically inconsistent records.
+
+No obvious cases were identified where:
+** Profit was greater than Sales
+** Profit was lower than negative Sales
 
 
