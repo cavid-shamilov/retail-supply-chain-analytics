@@ -405,7 +405,7 @@ Business rule:
 
 ```text
 Ship Date >= Order Date
-text```
+```
 All checked records followed this rule.
 
 No records were identified where a product was shipped before the corresponding order date.
