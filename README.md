@@ -538,3 +538,94 @@ Discount and profitability
 The Excel analysis also established the key business metrics and analytical questions that were subsequently reproduced and extended using SQL Server.
 
 📂 **File Path:** [`Excel/Retail-Supply-Chain-Sales-Dataset(ANALYSIS).xlsx`](Excel/Retail-Supply-Chain-Sales-Dataset(ANALYSIS).xlsx)
+
+---
+
+## 8. SQL Analysis
+
+The validated dataset was subsequently imported into SQL Server for analytical querying.
+
+The SQL analysis reproduces and extends the business questions explored during the Excel stage using SQL Server queries.
+
+---
+
+### 8.1 Overall Sales Performance
+
+The first stage of the SQL analysis focuses on the overall sales performance of the company.
+
+The following seven business questions were analyzed using SQL Server:
+
+1. Total Sales
+2. Total Orders
+3. Total Quantity
+4. Average Order Value (AOV)
+5. Total Profit
+6. Overall Profit Margin
+7. Average Discount
+
+All calculations in this section exclude returned transactions unless otherwise specified.
+
+---
+
+#### Question 1: What is the Total Sales of the company, excluding returned transactions?
+
+```sql
+select sum(sales) as [Total Sales]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+```
+Result: Total Sales: $2,116,696.58
+
+#### Question 2: What is the Total Order Count of the company, excluding returned transactions?
+
+```sql
+select count(distinct Order_ID) as [Total Order]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+```
+Result: Total Orders: 4,713
+
+#### Question 3: What is the Total Quantity of the company, excluding returned transactions?
+
+```sql
+select sum(quantity) as [Total Quantity]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+```
+Result: Total Quantity: 34,820 units
+
+#### Question 4: What is the AOV of the company?
+
+```sql
+select cast(round(sum(Sales) /count(distinct Order_ID), 2, 0)as decimal(10,2)) as AOV
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+```
+Result: Average Order Value (AOV): $449.12
+
+#### Question 5: What is the Total Profit of the company?
+
+```sql
+select sum(profit) as [Total Profit]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+```
+Result: Total Profit: $263,164.66
+
+#### Question 6: What is the Overall Profit Margin of the company?
+
+```sql
+select cast(sum(profit)/sum(sales)*100 as decimal(10,2)) as [Overal Profit Margin]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+```
+Result: Overall Profit Margin: 12.43%
+
+#### Question 7: What is the Average Discount of the company?
+
+```sql
+select cast(avg(discount)*100 as decimal(10,2)) as [Average Discount]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+```
+Result: 
