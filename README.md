@@ -499,6 +499,7 @@ The analysis covered:
 ### 6.1 Overall Performance
 
 The first stage of the analysis focused on the overall performance of the business.
+
 KPI Definitions
 
 Total Sales: Total revenue generated from the included transactions.
@@ -519,3 +520,113 @@ Profit Margin = Total Profit / Total Sales
 ```
 The overall Profit Margin was calculated from aggregated Profit and Sales rather than taking the simple average of row-level profit margins.
 ![Overall Performance](Excel_screenshots_overall_performance.png)
+
+---
+
+### 6.2 Time Analysis
+
+The time analysis examined how sales performance changed over time.
+
+The existing Calendar Table was used to support time-based analysis.
+
+The analysis included:
+
+- Sales by year
+- Sales by month
+- Profit by month
+- Quantity by month
+- Orders by month
+- Month-over-Month (MoM) Sales Growth
+- Best-performing month
+- Lowest-performing month
+- Year-over-Year (YoY) Sales Growth
+
+MoM analysis was used to understand short-term changes in sales performance.
+The analysis also identified November as the highest-sales month and February as the lowest-sales month within the analyzed period.
+  ![Time Analysis](Excel_screenshots_time_analysis.png)
+  
+---
+
+### 6.3 Product Performance
+
+Product analysis was performed at multiple levels:
+
+Category
+Sub-Category
+Product
+
+The analysis examined:
+
+Total Sales
+Total Profit
+Profit Margin
+Quantity
+
+This allowed products and product groups to be evaluated not only by revenue generation but also by profitability.
+
+The analysis also helps identify:
+
+- High-sales categories
+- High-profit categories
+- Loss-making sub-categories
+- Top products by Sales
+- Top products by Profit
+- Products with high Profit Margin
+- Products contributing significantly to total Sales
+ ![Product Performance](Excel_screenshots_product_performance.png)
+
+---
+
+### 6.4 Regional Performance
+
+Regional analysis was performed to compare business performance across geographic dimensions.
+
+The analysis included:
+
+- Region
+- State
+
+The following metrics were evaluated:
+
+- Total Sales
+- Total Profit
+- Quantity
+- Orders
+
+The analysis was used to identify differences between geographic markets and to distinguish high-performing and lower-performing areas.
+![Regional Performance](Excel_screenshots_regional_performance.png)
+
+---
+
+### 6.5 Salesperson Performance
+
+Salesperson performance was analyzed using the Retail Sales People field.
+
+The analysis included:
+
+- Total Sales
+- Total Profit
+- Distinct Orders
+  ![Salesperson Performance](Excel_screenshots_salesperson_performance.png)
+---
+
+### 6.6 Discount & Profitability Analysis
+
+Discount levels were analyzed to understand their relationship with sales and profitability.
+
+A Pivot Table was created with:
+
+Rows: Discount
+Values: Sum of Profit, Distinct Order Count, Sum of Sales, Profit Margin
+Filter: Returned = Not
+
+
+The analysis showed that average profitability generally declined at higher discount levels, with average Profit becoming negative at higher discount tiers.
+
+However, the relationship was not perfectly linear. For example, the 10% discount level had a higher average Profit than the 0% discount level.
+
+Therefore, the analysis identifies an association between discount levels and profitability rather than establishing that discount alone causes the change in profitability.
+
+  ![Discount and Profitability](Excel_screenshots_discount_profitability.png)
+
+---
