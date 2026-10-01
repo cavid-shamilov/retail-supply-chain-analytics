@@ -447,7 +447,9 @@ The following fields were investigated:
 - Profit
 
 Large positive and negative Profit values were investigated rather than automatically removed. For example, the lowest observed Profit value was approximately -6,599.98. This record was investigated and had a 70% discount, providing a plausible business explanation for the large loss. Therefore, the record was retained. This follows the principle: An outlier is not automatically an error.
+
 ---
+
 ### 5.9 Returned Transactions
 
 Transactions marked as returned were reviewed because the dataset contains both transaction amounts and return status.
@@ -458,8 +460,11 @@ Returned = 'Not'
 ```
 were included.
 
-Returned transactions were excluded from the main sales and profitability calculations to avoid treating returned transactions as retained sales in the primary performance analysis. The original records were preserved for potential future return-related analysis.
+Returned transactions were excluded from the main sales and profitability calculations to avoid treating returned transactions as retained sales in the primary performance analysis.
+The original records were preserved for potential future return-related analysis.
+
 ---
+
 ### 5.10 Final Data Preparation
 
 After completing the data quality checks:
