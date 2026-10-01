@@ -479,3 +479,43 @@ After completing the data quality checks:
 - Returned transactions were excluded from the main performance analysis using the analysis rule described above.
 - The dataset was considered ready for analytical analysis.
 
+---
+
+## 6. Excel Pivot Table Analysis
+
+After completing the data quality assessment and preparation, Excel Pivot Tables were used to analyze sales performance from several business perspectives.
+
+The analysis covered:
+
+1. Overall Performance
+2. Time Analysis
+3. Product Performance
+4. Regional Performance
+5. Salesperson Performance
+6. Discount & Profitability
+
+---
+
+### 6.1 Overall Performance
+
+The first stage of the analysis focused on the overall performance of the business.
+KPI Definitions
+
+Total Sales: Total revenue generated from the included transactions.
+
+Total Profit: Total profit generated from the included transactions.
+
+Total Quantity: Total number of units sold.
+
+Total Orders: Distinct number of orders based on Order ID.
+
+Average Order Value (AOV)
+```text
+AOV = Total Sales / Total Orders
+```
+Overall Profit Margin
+```text
+Profit Margin = Total Profit / Total Sales
+```
+The overall Profit Margin was calculated from aggregated Profit and Sales rather than taking the simple average of row-level profit margins.
+![Overall Performance](Excel_screenshots_overall_performance.png)
