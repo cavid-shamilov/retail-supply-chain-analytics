@@ -177,7 +177,7 @@ This project uses the **Retail Supply Chain Sales Dataset** from Kaggle.
 
 Dataset source:
 
-https://www.kaggle.com/datasets/shandeep777/retail-supply-chain-sales-dataset
+[Retail Supply Chain Sales Dataset](https://www.kaggle.com/datasets/shandeep777/retail-supply-chain-sales-dataset?utm_source=chatgpt.com).
 
 ### 4.2 Dataset Size
 
@@ -257,7 +257,7 @@ Before beginning the analysis, a separate Data Dictionary was prepared to docume
 This documentation was used as a reference during data validation, cleaning, and analysis.
 
 **Data Dictionary:**  
-`Data_Dictionary.docx`
+`[Data Dictionary (Word Document)](Data_Dictionary.docx).
 
 ---
 
