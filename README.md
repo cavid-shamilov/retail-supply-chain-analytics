@@ -776,5 +776,7 @@ Time Analysis Summary
 -- February recorded the lowest total sales, orders, and units sold. <br>
 -- December generated the highest total profit, despite November having the highest sales. <br>
 -- Monthly sales growth was volatile, with both significant increases and decreases across different months.<br>
+
 ---
+
 ### 8.1 Product Performance
