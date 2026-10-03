@@ -771,8 +771,10 @@ Finding: Sales declined by 5.31% in 2015, followed by strong growth of 33.01% in
 
 Time Analysis Summary
 
--- Annual sales declined by 5.31% in 2015 but increased by 33.01% in 2016 and 14.77% in 2017.
--- November generated the highest total sales, orders, and units sold across the analyzed period.
--- February recorded the lowest total sales, orders, and units sold.
--- December generated the highest total profit, despite November having the highest sales.
--- Monthly sales growth was volatile, with both significant increases and decreases across different months.
+-- Annual sales declined by 5.31% in 2015 but increased by 33.01% in 2016 and 14.77% in 2017. <br>
+-- November generated the highest total sales, orders, and units sold across the analyzed period. <br>
+-- February recorded the lowest total sales, orders, and units sold. <br>
+-- December generated the highest total profit, despite November having the highest sales. <br>
+-- Monthly sales growth was volatile, with both significant increases and decreases across different months.<br>
+---
+### 8.1 Product Performance
