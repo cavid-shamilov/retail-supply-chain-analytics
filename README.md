@@ -628,4 +628,151 @@ select cast(avg(discount)*100 as decimal(10,2)) as [Average Discount]
 from [Retail-Supply-Chain-Sales-Dataset]
 where Returned='not'
 ```
-Result: 
+Result: Average Discount: 15.73%
+
+#### Question 8: What were the total sales for each year, excluding returned transactions?
+
+```sql
+select C.Year,sum (sales ) as [Total Sales]
+from [Retail-Supply-Chain-Sales-Dataset] as RS
+inner join Calendar as C
+on C.Date=RS.Order_Date
+where Returned='Not'
+group by c.Year
+order by C.year
+```
+Finding: Sales declined by 5.31% in 2015 compared with 2014, followed by strong growth in 2016 and 2017. The highest annual sales were recorded in 2017 at $657,713.12.
+
+#### Question 9: What was the monthly sales trend across the analyzed period, excluding returned transactions?
+```sql
+select c.[Month Name],
+sum (sales ) as [Total Sales]
+from [Retail-Supply-Chain-Sales-Dataset] as RS
+inner join Calendar as C
+on C.Date=RS.Order_Date
+where Returned='Not'
+group by c.[Month Name],c.Month
+order by c.Month
+```
+Finding: Monthly sales varied considerably across the year. November recorded the highest total sales at $253,077.36, while February recorded the lowest at $118,996.39.
+
+#### Question 10: What was the monthly breakdown of total profit across the analyzed period, excluding returned transactions?
+
+```sql
+ select c.[Month Name],
+sum (Profit) as [Total Profit]
+from [Retail-Supply-Chain-Sales-Dataset] as RS
+inner join Calendar as C
+on C.Date=RS.Order_Date
+where Returned='Not'
+group by c.[Month Name],c.Month
+order by c.Month
+```
+Finding: Monthly profit was highest in December at $30,274.05, followed by September at $29,567.89. April recorded the lowest monthly profit at $11,347.05. <br>
+Additional Insight: The month with the highest sales was not the month with the highest profit, indicating that higher sales volume does not necessarily translate into the highest profitability
+
+#### Question 11: What was the monthly breakdown of total orders and units sold, excluding returned transactions?
+
+```sql
+select c.[Month Name],
+count(distinct order_id) as [Order Count],
+sum (Quantity) as [Total Quantity]
+from [Retail-Supply-Chain-Sales-Dataset] as RS
+inner join Calendar as C
+on C.Date=RS.Order_Date
+where Returned='Not'
+group by c.[Month Name],c.Month
+order by c.Month
+```
+Finding: November had the highest number of orders (577) and units sold (4,402), while February had the lowest number of orders (250) and units sold (1,837).
+
+#### Question 12: What was the Month-over-Month (MoM) sales growth rate, excluding returned transactions?
+
+```sql
+WITH Monthly_Sales_CTE AS (
+SELECT 
+C.Year,
+C.Month,
+C.[Month Name],
+SUM(RS.Sales) AS MonthlySales
+FROM [Retail-Supply-Chain-Sales-Dataset] AS RS
+INNER JOIN Calendar AS C
+ON C.Date = RS.Order_Date
+WHERE RS.Returned = 'Not'
+GROUP BY C.Year, C.Month, C.[Month Name]
+)
+
+SELECT 
+Year,
+Month,
+[Month Name],
+MonthlySales,
+LAG(MonthlySales) OVER (ORDER BY Year, Month) AS PrevMonthSales,
+    round(((MonthlySales - LAG(MonthlySales) OVER (ORDER BY Year, Month)) * 100.0) 
+        / LAG(MonthlySales) OVER (ORDER BY Year, Month), 2) AS [MoM Sales Growth %]
+FROM Monthly_Sales_CTE
+ORDER BY Year, Month
+```
+Finding: Monthly sales growth was volatile throughout the analyzed period, with both substantial increases and decreases from month to month. November showed strong month-over-month growth in each year, particularly in 2014 (+88.53%) and 2015 (+80.54%).
+
+#### Question 13: Which month had the highest total sales across the analyzed period, excluding returned transactions?
+
+```sql
+select top 1
+c.[Month Name],
+sum (Sales) as [Total Sales]
+from [Retail-Supply-Chain-Sales-Dataset] as RS
+inner join Calendar as C
+on C.Date=RS.Order_Date
+where Returned='Not'
+group by c.[Month Name]
+order by [Total Sales] desc
+```
+Result: November — $253,077.36
+
+#### Question 14: Which month had the lowest total sales across the analyzed period, excluding returned transactions?
+
+```sql
+select top 1
+c.[Month Name],
+sum (Sales) as [Total Sales]
+from [Retail-Supply-Chain-Sales-Dataset] as RS
+inner join Calendar as C
+on C.Date=RS.Order_Date
+where Returned='Not'
+group by c.[Month Name]
+order by [Total Sales]
+```
+Result: February — $118,996.39
+
+#### Question 15: What was the Year-over-Year (YoY) sales growth rate, excluding returned transactions?
+
+```sql
+WITH Annual_Sales_CTE AS (
+SELECT 
+C.Year,
+SUM(RS.Sales) AS Annual_Sales
+FROM [Retail-Supply-Chain-Sales-Dataset] AS RS
+INNER JOIN Calendar AS C
+ON C.Date = RS.Order_Date
+WHERE RS.Returned = 'Not'
+GROUP BY C.Year
+)
+SELECT 
+Year,
+Annual_Sales,
+LAG(Annual_Sales) OVER (ORDER BY Year) AS PrevYearSales,
+ROUND(((Annual_Sales - LAG(Annual_Sales) OVER (ORDER BY Year)) * 100.0) 
+/ LAG(Annual_Sales) OVER (ORDER BY Year), 2) AS [YoY Sales Growth %]
+FROM Annual_Sales_CTE
+ORDER BY Year ASC
+```
+Finding: Sales declined by 5.31% in 2015, followed by strong growth of 33.01% in 2016 and a further 14.77% increase in 2017. Overall, annual sales reached their highest level in 2017.
+
+Time Analysis Summary
+
+-- Annual sales declined by 5.31% in 2015 but increased by 33.01% in 2016 and 14.77% in 2017.
+-- November generated the highest total sales, orders, and units sold across the analyzed period.
+-- February recorded the lowest total sales, orders, and units sold.
+-- December generated the highest total profit, despite November having the highest sales.
+-- Monthly sales growth was volatile, with both significant increases and decreases across different months.
