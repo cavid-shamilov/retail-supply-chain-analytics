@@ -890,4 +890,110 @@ Finding: The Canon imageCLASS 2200 Advanced Copier was the largest individual co
 - Tables generated significant sales but resulted in the largest sub-category loss of $16,667.54.
 - The Canon imageCLASS 2200 Advanced Copier was the top product by both sales and total profit.
 - The highest-margin products did not necessarily represent the largest sales contributors, highlighting the difference between profitability rate and business contribution.
- 
+
+ ---
+
+ ### 8.4 Regional Performance
+
+#### Question 24: Which regions generated the highest total sales, excluding returned transactions?
+
+```sql
+select region,sum(sales) as [Total Sales]
+from [Retail-Supply-Chain-Sales-Dataset]
+where returned='not'
+group by Region
+order by [Total Sales] desc
+```
+
+Finding: East generated the highest total sales at $637,076.24, followed closely by West at $617,974.87.
+
+#### Question 25: Which regions generated the highest total profit, excluding returned transactions?
+
+```sql
+select region,sum(Profit) as [Total Profit]
+from [Retail-Supply-Chain-Sales-Dataset]
+where returned='not'
+group by Region
+order by [Total Profit] desc
+```
+Finding: West generated the highest total profit at $88,755.36, followed by East at $86,538.06.
+
+#### Question 26: Which regions had the highest profit margins, excluding returned transactions?
+
+```sql
+select region,cast(sum(profit)/sum(sales)*100 as decimal(10,2)) as [Profit Margin]
+from [Retail-Supply-Chain-Sales-Dataset]
+where returned='not'
+group by Region
+order by [Profit Margin] desc
+```
+
+Finding: West had the highest profit margin at 14.36%, while Central had the lowest at 8.90%.
+
+#### Question 27: What were the total orders and units sold in each region, excluding returned transactions?
+
+```sql
+select region, count(distinct order_id) as [Total Order],
+sum(quantity) as [Total Quantity]
+from [Retail-Supply-Chain-Sales-Dataset]
+where returned='not'
+group by Region
+```
+
+Finding: West had the highest number of orders (1,422) and units sold (10,368), while South had the lowest number of orders (798) and units sold (5,947).
+
+#### Question 28: What percentage of total company sales did each region contribute, excluding returned transactions?
+
+```sql
+select region,
+sum(sales) as [Regional Sales],
+sum(sum(sales)) over() as [Total Company Sales],
+round((sum(sales)*100.0)/ sum(sum(sales)) over(), 2) as [Sales Contribution %]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+group by region
+```
+
+Finding: East contributed the largest share of total company sales at 30.10%, followed by West at 29.20%. Together, these two regions accounted for 59.30% of total sales.
+
+#### Question 29: What was the Month-over-Month (MoM) sales growth rate for each region, excluding returned transactions?
+
+```sql
+WITH RegionalAnaliz AS (
+SELECT 
+RS.Region,
+C.Year,
+C.Month,
+C.[Month Name],
+SUM(RS.Sales) AS Total_Sales
+FROM [Retail-Supply-Chain-Sales-Dataset] AS RS
+INNER JOIN Calendar AS C
+ON C.Date = RS.Order_Date
+WHERE RS.Returned = 'Not'
+GROUP BY RS.Region, C.Year, C.Month, C.[Month Name]
+)
+SELECT 
+Region,
+Year,
+Month,
+[Month Name],
+Total_Sales,
+LAG(Total_Sales) OVER (PARTITION BY Region ORDER BY Year, Month) AS Prev_Month_Sales,
+ROUND(((Total_Sales - LAG(Total_Sales) OVER (PARTITION BY Region ORDER BY Year, Month)) * 100.0) 
+/ LAG(Total_Sales) OVER (PARTITION BY Region ORDER BY Year, Month), 2) AS [Regional MoM Sales Growth %]
+FROM RegionalAnaliz
+ORDER BY Region, Year, Month
+```
+
+Finding: Monthly sales growth varied substantially across all regions, with frequent sharp increases and decreases from one month to the next. The South region showed the largest observed MoM increase at 950.54%, while all regions experienced significant month-to-month fluctuations.
+
+Additional Insight: Extreme MoM growth rates should be interpreted alongside absolute sales values, as large percentage changes can result from relatively low sales in the previous month.
+
+**Regional Performance Summary**
+
+- East was the largest region by total sales, while West generated the highest total profit and profit margin.
+- West also recorded the highest number of orders and units sold.
+- East and West together contributed 59.30% of total company sales.
+- Central had the lowest regional profit margin at 8.90%, despite generating $487,232.89 in sales.
+- Monthly sales were highly volatile across all regions, with substantial MoM increases and decreases.
+
