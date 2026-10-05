@@ -1067,3 +1067,159 @@ Finding: Chuck Magee had the highest Average Order Value (AOV) at $469.47, close
 - Anna Andreadi generated the highest total profit at $88,755.36, achieved the highest profit margin at 14.36%, and handled the highest number of orders with 1,422.
 - Cassandra Brandow had the second-highest AOV at $469.18 despite generating the lowest total sales and handling the fewest orders.
 - Kelly Williams had the lowest profit margin at 8.90% and the lowest AOV at $428.90.
+
+---
+
+### 8.6 Discount & Profitability
+
+#### Question 35: What was the average discount across all non-returned transactions?
+
+```sql
+select cast(avg(discount)*100 as decimal(10,2))
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='Not'
+```
+
+Finding: The average discount across all non-returned transactions was 15.73%.
+
+#### Question 36: How did Average Profit vary across different Discount levels, excluding returned transactions?
+
+```sql
+select Discount,cast(round(avg(profit), 2) as decimal(10,2)) as [Average Profit]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+group by discount
+order by Discount
+```
+
+Finding: Average Profit was positive at discount levels up to 20%, but became negative at discount levels of 30% and above. The lowest Average Profit was observed at a 50% discount, at -$309.86.
+
+#### Question 37: How did Average Profit Margin (%) vary across different Discount levels, excluding returned transactions?
+
+```sql
+select Discount,cast(round(avg((Profit/sales)*100.0), 2) as decimal(10,2)) as  [Average Profit Margin]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+group by discount
+order by Discount
+```
+
+Finding: Average Profit Margin generally declined as discount levels increased. Profit Margin became negative at discount levels of 30% and above and reached -183.27% at an 80% discount.
+
+#### Question 38: What pattern is observed between Average Discount, Total Profit, and Average Profit across product Categories, excluding returned transactions?
+
+```sql
+select Category,
+cast(round(avg(discount)*100.0, 2) as decimal(10,2)) as [Average Discount],
+cast(round(sum(profit), 2) as decimal(10,2)) as [Total Profit],
+cast(round(avg(profit), 2) as decimal(10,2)) as [Average Profit]
+from [Retail-Supply-Chain-Sales-Dataset]
+where returned='not'
+group by Category
+order by [Average Discount]
+```
+
+Finding: Technology had the lowest average discount at 13.07% and generated the highest total profit at $131,458.28. Furniture had the highest average discount at 17.71% and the lowest total profit at $16,110.09.
+
+#### Question 39: What pattern is observed between Average Discount, Total Profit, and Average Profit across Regions, excluding returned transactions?
+
+```sql
+select Region,
+cast(round(avg(discount)*100.0, 2) as decimal(10,2)) as [Average Discount],
+cast(round(sum(profit), 2) as decimal(10,2)) as [Total Profit],
+cast(round(avg(profit), 2) as decimal(10,2)) as [Average Profit]
+from [Retail-Supply-Chain-Sales-Dataset]
+where returned='not'
+group by Region
+order by [Average Discount]
+```
+
+Finding: West had the lowest average discount at 10.90% and generated the highest total profit at $88,755.36. Central had the highest average discount at 23.79% and the lowest average profit at $19.43.
+
+Additional Insight: East and South had the same average discount of 14.59%, but different profit levels, indicating that discount level alone does not fully explain profitability differences across regions.
+
+#### Question 40: Which products have high discount rates and negative total profit, excluding returned transactions?
+
+```sql
+select Product_Name,
+cast(round(avg(discount)*100.0, 2) as decimal(10,2)) as [Average Discount],
+cast(round(sum(profit), 2) as decimal(10,2)) as [Total Profit],
+cast(round(avg(profit), 2) as decimal(10,2)) as [Average Profit]
+from [Retail-Supply-Chain-Sales-Dataset]
+where returned='not'
+group by Product_Name
+having sum(profit)<0
+order by [Average Discount] desc
+```
+Finding: Several products combined high discount rates with negative total profit. The highest discount level observed was 80%, while the largest total loss among the first 10 products was -$506.46 for the Lexmark MarkNet N8150 Wireless Print Server at a 70% average discount.
+
+**Discount & Profitability Summary**
+
+- The average discount across non-returned transactions was 15.73.
+- Average Profit was positive at discount levels up to 20% but became negative at 30% and above.
+- Average Profit Margin generally declined as discount levels increased, reaching -183.27% at an 80% discount.
+- Technology had the lowest average discount among the three categories and generated the highest total profit, while Furniture had the highest average discount and substantially lower total profit.
+- West had the lowest average discount among the regions and generated the highest total profit, while Central had the highest average discount and the lowest average profit.
+- Several products combined high discount rates with negative total profit, highlighting products that may require further profitability investigation.
+
+---
+
+### 8.7 Customer Analysis
+
+#### Question 41: What were the total sales for each Customer Segment, excluding returned transactions?
+
+```sql
+select Segment,sum(sales) as [Total Sales]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+group by Segment
+order by [Total Sales] desc
+```
+
+#### Question 42: What was the Profit Margin (%) for each Customer Segment, excluding returned transactions?
+
+```sql
+select Segment,
+cast(round(sum(profit)/sum(sales)*100.0, 2) as decimal (10,2)) as [Average Profit Margin]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+group by Segment
+order by [Average Profit Margin] desc
+```
+
+#### Question 43: Who were the top 10 customers by total sales revenue, excluding returned transactions?
+
+```sql
+select top 10
+Customer_Name,
+sum(sales) as [Total Sales]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+group by Customer_Name
+order by [Total Sales] desc
+```
+
+#### Question 44: Who were the top 10 customers by total profit, excluding returned transactions?
+
+```sql
+select top 10
+Customer_Name,
+sum(Profit) as [Total Profit]
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+group by Customer_Name
+order by [Total Profit] desc
+```
+
+#### Question 45: What was the Average Order Value (AOV) per customer, and which customers had the highest AOV among those with at least 3 orders?
+
+```sql
+select 
+Customer_Name,
+(sum(sales)*1.0)/count(distinct order_id) as AOV
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+group by Customer_Name
+HAVING COUNT(DISTINCT Order_ID) >= 3
+order by AOV desc
+```
