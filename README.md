@@ -997,3 +997,73 @@ Additional Insight: Extreme MoM growth rates should be interpreted alongside abs
 - Central had the lowest regional profit margin at 8.90%, despite generating $487,232.89 in sales.
 - Monthly sales were highly volatile across all regions, with substantial MoM increases and decreases.
 
+---
+
+### 8.5 Salesperson Performance
+
+#### Question 30: Which salespeople generated the highest total sales, excluding returned transactions?
+
+```sql
+select Retail_Sales_People,sum(sales) as [Total Sales]
+from [Retail-Supply-Chain-Sales-Dataset]
+where returned='not'
+group by Retail_Sales_People
+order by [Total Sales] desc
+```
+
+Finding: Chuck Magee generated the highest total sales at $637,076.24, followed by Anna Andreadi at $617,974.87.
+
+#### Question 31: Which salespeople generated the highest total profit, excluding returned transactions?
+
+```sql
+select Retail_Sales_People,sum(Profit) as [Total Profit]
+from [Retail-Supply-Chain-Sales-Dataset]
+where returned='not'
+group by Retail_Sales_People
+order by [Total Profit] desc
+```
+
+Finding: Anna Andreadi generated the highest total profit at $88,755.36, followed by Chuck Magee at $86,538.06.
+
+#### Question 32: Which salespeople had the highest profit margins, excluding returned transactions?
+
+```sql
+select Retail_Sales_People,cast(sum(profit)/sum(sales)*100 as decimal(10,2)) as [Profit Margin]
+from [Retail-Supply-Chain-Sales-Dataset]
+where returned='not'
+group by Retail_Sales_People
+order by [Profit Margin] desc
+```
+
+Finding: Anna Andreadi had the highest profit margin at 14.36%, while Kelly Williams had the lowest at 8.90%.
+
+#### Question 33: How many total orders did each salesperson handle, excluding returned transactions?
+
+```sql
+select Retail_Sales_People, count(distinct order_id) as [Total Order]
+from [Retail-Supply-Chain-Sales-Dataset]
+where returned='not'
+group by Retail_Sales_People
+order by [Total Order]desc
+```
+
+Finding: Anna Andreadi handled the highest number of orders with 1,422, while Cassandra Brandow handled the fewest with 798.
+
+#### Question 34: What was the Average Order Value (AOV) for each salesperson, excluding returned transactions?
+
+```sql
+select Retail_Sales_People,cast(round(sum(sales)/count(distinct order_id), 2, 1) as decimal(10,2)) as AOV
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+group by Retail_Sales_People
+order by AOV desc
+```
+
+Finding: Chuck Magee had the highest Average Order Value (AOV) at $469.47, closely followed by Cassandra Brandow at $469.18.
+
+**Salesperson Performance Summary**
+
+- Chuck Magee generated the highest total sales at $637,076.24 and had the highest AOV at $469.47.
+- Anna Andreadi generated the highest total profit at $88,755.36, achieved the highest profit margin at 14.36%, and handled the highest number of orders with 1,422.
+- Cassandra Brandow had the second-highest AOV at $469.18 despite generating the lowest total sales and handling the fewest orders.
+- Kelly Williams had the lowest profit margin at 8.90% and the lowest AOV at $428.90.
