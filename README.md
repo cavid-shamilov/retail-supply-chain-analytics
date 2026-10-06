@@ -1176,6 +1176,8 @@ group by Segment
 order by [Total Sales] desc
 ```
 
+Finding: The Consumer segment generated the highest total sales at $1,056,016.09, accounting for approximately half of total company sales, while Home Office generated the lowest at $406,446.30.
+
 #### Question 42: What was the Profit Margin (%) for each Customer Segment, excluding returned transactions?
 
 ```sql
@@ -1186,6 +1188,8 @@ where Returned='not'
 group by Segment
 order by [Average Profit Margin] desc
 ```
+
+Finding: Home Office had the highest profit margin at 14.64%, while Consumer had the lowest at 11.09%.
 
 #### Question 43: Who were the top 10 customers by total sales revenue, excluding returned transactions?
 
@@ -1199,6 +1203,8 @@ group by Customer_Name
 order by [Total Sales] desc
 ```
 
+Finding: Sean Miller was the top customer by total sales, generating $24,516.62, followed by Tamara Chand with $18,951.82.
+
 #### Question 44: Who were the top 10 customers by total profit, excluding returned transactions?
 
 ```sql
@@ -1211,6 +1217,8 @@ group by Customer_Name
 order by [Total Profit] desc
 ```
 
+Finding: Tamara Chand was the top customer by total profit, contributing $8,998.65, followed by Sanjit Chand with $5,631.63.
+
 #### Question 45: What was the Average Order Value (AOV) per customer, and which customers had the highest AOV among those with at least 3 orders?
 
 ```sql
@@ -1222,4 +1230,94 @@ where Returned='not'
 group by Customer_Name
 HAVING COUNT(DISTINCT Order_ID) >= 3
 order by AOV desc
+```
+
+Finding: Among customers with at least three orders, Sean Miller had the highest Average Order Value (AOV) at $6,129.16, followed by Tamara Chand at $4,737.96.
+
+**Customer Analysis Summary**
+- Consumer generated the highest total sales at $1,056,016.09, while Home Office had the highest profit margin at 14.64%.
+- Sean Miller was the top customer by total sales at $24,516.62, while Tamara Chand generated the highest total profit at $8,998.65.
+- Sean Miller also had the highest AOV among customers with at least three orders, at $6,129.16.
+- The difference between the top sales and top profit customers highlights that the customer generating the highest revenue does not necessarily generate the highest profit.
+- Consumer represented approximately 49.9% of total company sales, indicating that this segment was the largest sales contributor.
+
+---
+
+### 8.8 Customer Analysis
+
+#### Question 46: What are the top 3 products by total sales within each category, excluding returned transactions?
+
+```sql
+WITH Product_Sales_CTE AS (
+    SELECT 
+        Category,
+        Product_Name,
+        SUM(Sales) AS Total_Sales,
+        -- Hər kateqoriya daxilində satışı böyükdən-kiçiyə sıralayıb nömrələyirik:
+        DENSE_RANK() OVER (PARTITION BY Category ORDER BY SUM(Sales) DESC) AS Sales_Rank
+    FROM [Retail-Supply-Chain-Sales-Dataset]
+    WHERE Returned = 'Not'
+    GROUP BY Category, Product_Name
+)
+SELECT 
+    Category,
+    Sales_Rank,
+    Product_Name,
+    CAST(ROUND(Total_Sales, 2) AS DECIMAL(10,2)) AS [Total Sales]
+FROM Product_Sales_CTE
+WHERE Sales_Rank <= 3 
+ORDER BY Category, Sales_Rank;
+```
+
+#### Question 47: What are the top 3 products by total sales within each region, excluding returned transactions?
+
+```sql
+with region_sales_cte as (
+select region,
+product_name,
+sum(sales) as Total_Sales,
+DENSE_RANK() over(partition by region order by sum(sales)) as Sales_Rank
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+group by Region,Product_Name
+)
+select region,
+Sales_Rank,
+Product_Name,
+CAST(ROUND(Total_Sales, 2) AS DECIMAL(10,2)) AS [Total Sales]
+from region_sales_cte
+where Sales_Rank <=3
+order by region,[Total Sales] desc
+```
+
+#### Question 48:
+#### Question 49: What is the cumulative sales contribution of each product to total company sales, excluding returned transactions?
+
+```sql
+SELECT 
+Product_Name,
+SUM(Sales) AS Product_Sales,
+SUM(SUM(Sales)) OVER () AS Total_Company_Sales,
+ROUND((SUM(Sales) * 100.0) / SUM(SUM(Sales)) OVER (), 2) AS [Sales Contribution %],
+SUM(SUM(Sales)) OVER (ORDER BY SUM(Sales) DESC),
+SUM(SUM(Sales)) OVER (ORDER BY SUM(Sales) DESC)*100.0/SUM(SUM(Sales)) OVER ()
+FROM [Retail-Supply-Chain-Sales-Dataset]
+WHERE Returned = 'Not'
+GROUP BY Product_Name
+ORDER BY [Sales Contribution %] DESC
+```
+
+#### Question 50: What percentage of category sales does each product contribute, excluding returned transactions?
+
+```sql
+SELECT 
+Category,
+Product_Name,
+CAST(ROUND(SUM(Sales), 2) AS DECIMAL(10,2)) AS [Product Sales],
+CAST(ROUND(SUM(SUM(Sales)) OVER (PARTITION BY Category), 2) AS DECIMAL(10,2)) AS [Category Total Sales],
+CAST(ROUND((SUM(Sales) * 100.0) / SUM(SUM(Sales)) OVER (PARTITION BY Category), 2) AS DECIMAL(10,2)) AS [Category Sales Contribution %]
+FROM [Retail-Supply-Chain-Sales-Dataset]
+WHERE Returned = 'Not'
+GROUP BY Category, Product_Name
+ORDER BY Category, [Category Sales Contribution %] DESC
 ```
