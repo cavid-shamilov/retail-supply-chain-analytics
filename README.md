@@ -1290,7 +1290,26 @@ where Sales_Rank <=3
 order by region,[Total Sales] desc
 ```
 
-#### Question 48:
+#### Question 48: What is the sales rank of each product within its category, based on total sales, excluding returned transactions?
+
+```sql
+with category_sales_cte as (
+select Category,
+product_name,
+sum(sales) as Total_Sales,
+DENSE_RANK() over(partition by category order by sum(sales) desc) as Sales_Rank
+from [Retail-Supply-Chain-Sales-Dataset]
+where Returned='not'
+group by Category,Product_Name
+)
+select category,
+Sales_Rank,
+Product_Name,
+CAST(ROUND(Total_Sales, 2) AS DECIMAL(10,2)) AS [Total Sales]
+from category_sales_cte
+order by Category,[Total Sales] desc
+```
+ 
 #### Question 49: What is the cumulative sales contribution of each product to total company sales, excluding returned transactions?
 
 ```sql
