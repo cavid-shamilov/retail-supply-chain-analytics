@@ -1276,7 +1276,7 @@ with region_sales_cte as (
 select region,
 product_name,
 sum(sales) as Total_Sales,
-DENSE_RANK() over(partition by region order by sum(sales)) as Sales_Rank
+DENSE_RANK() over(partition by region order by sum(sales) desc) as Sales_Rank
 from [Retail-Supply-Chain-Sales-Dataset]
 where Returned='not'
 group by Region,Product_Name
