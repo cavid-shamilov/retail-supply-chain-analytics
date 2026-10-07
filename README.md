@@ -1243,21 +1243,20 @@ Finding: Among customers with at least three orders, Sean Miller had the highest
 
 ---
 
-### 8.8 Customer Analysis
+### 8.8 The other questions
 
 #### Question 46: What are the top 3 products by total sales within each category, excluding returned transactions?
 
 ```sql
 WITH Product_Sales_CTE AS (
-    SELECT 
-        Category,
-        Product_Name,
-        SUM(Sales) AS Total_Sales,
-        -- Hər kateqoriya daxilində satışı böyükdən-kiçiyə sıralayıb nömrələyirik:
-        DENSE_RANK() OVER (PARTITION BY Category ORDER BY SUM(Sales) DESC) AS Sales_Rank
-    FROM [Retail-Supply-Chain-Sales-Dataset]
-    WHERE Returned = 'Not'
-    GROUP BY Category, Product_Name
+SELECT 
+Category,
+Product_Name,
+SUM(Sales) AS Total_Sales,
+DENSE_RANK() OVER (PARTITION BY Category ORDER BY SUM(Sales) DESC) AS Sales_Rank
+FROM [Retail-Supply-Chain-Sales-Dataset]
+WHERE Returned = 'Not'
+GROUP BY Category, Product_Name
 )
 SELECT 
     Category,
@@ -1266,8 +1265,9 @@ SELECT
     CAST(ROUND(Total_Sales, 2) AS DECIMAL(10,2)) AS [Total Sales]
 FROM Product_Sales_CTE
 WHERE Sales_Rank <= 3 
-ORDER BY Category, Sales_Rank;
+ORDER BY Category, Sales_Rank
 ```
+Finding: Technology had the highest-selling individual product, with the Canon imageCLASS 2200 Advanced Copier generating $47,599.87 in sales. In Office Supplies, the Fellowes PB500 Electric Punch Plastic Comb Binding Machine ranked first with $27,453.38, while the HON 5400 Series Task Chairs for Big and Tall ranked first in Furniture with $19,417.14.
 
 #### Question 47: What are the top 3 products by total sales within each region, excluding returned transactions?
 
@@ -1290,6 +1290,8 @@ where Sales_Rank <=3
 order by region,[Total Sales] desc
 ```
 
+Finding: The Canon imageCLASS 2200 Advanced Copier ranked first in both the Central and East regions, generating $17,499.95 and $30,099.92 in sales, respectively. In the South region, the Cisco TelePresence System EX90 ranked first with $22,638.48, while the High Speed Automatic Electric Letter Opener led the West region with $13,100.24.
+
 #### Question 48: What is the sales rank of each product within its category, based on total sales, excluding returned transactions?
 
 ```sql
@@ -1309,9 +1311,10 @@ CAST(ROUND(Total_Sales, 2) AS DECIMAL(10,2)) AS [Total Sales]
 from category_sales_cte
 order by Category,[Total Sales] desc
 ```
+ Finding: The sales ranking showed that the top-selling products differed considerably across categories. In Furniture, the HON 5400 Series Task Chairs ranked first with $19,417.14 in sales. In Office Supplies, the Fellowes PB500 ranked first with $27,453.38, while the Canon imageCLASS 2200 Advanced Copier ranked first in Technology with $47,599.87.
  
 #### Question 49: What is the cumulative sales contribution of each product to total company sales, excluding returned transactions?
-
+(Pareto analysis)
 ```sql
 SELECT 
 Product_Name,
@@ -1325,6 +1328,7 @@ WHERE Returned = 'Not'
 GROUP BY Product_Name
 ORDER BY [Sales Contribution %] DESC
 ```
+The top five products accounted for approximately 6.47% of total company sales, with the Canon imageCLASS 2200 Advanced Copier contributing the largest individual share at 2.25%. The cumulative sales contribution reached approximately 80% at the 411th product, with the Luxo Professional Magnifying Clamp-On Fluorescent Lamps bringing the cumulative contribution to 80.06%. This indicates that sales were broadly distributed across a large number of individual products rather than being concentrated among a small number of products.
 
 #### Question 50: What percentage of category sales does each product contribute, excluding returned transactions?
 
@@ -1340,3 +1344,5 @@ WHERE Returned = 'Not'
 GROUP BY Category, Product_Name
 ORDER BY Category, [Category Sales Contribution %] DESC
 ```
+Finding:
+The contribution of individual products to category sales varied across categories. In Technology, the Canon imageCLASS 2200 Advanced Copier contributed 6.23% of category sales, while the Fellowes PB500 was the largest individual contributor in Office Supplies at 4.09%. In Furniture, the HON 5400 Series Task Chairs contributed 2.84% of category sales.
