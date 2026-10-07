@@ -1346,3 +1346,45 @@ ORDER BY Category, [Category Sales Contribution %] DESC
 ```
 Finding:
 The contribution of individual products to category sales varied across categories. In Technology, the Canon imageCLASS 2200 Advanced Copier contributed 6.23% of category sales, while the Fellowes PB500 was the largest individual contributor in Office Supplies at 4.09%. In Furniture, the HON 5400 Series Task Chairs contributed 2.84% of category sales.
+
+---
+
+## 9. Power BI Analysis
+
+### 9.1 Dashboard Overview
+
+Power BI was used to build an interactive dashboard for analyzing
+sales performance, profitability, time trends, product performance,
+regional performance, salesperson performance, and discount impact.
+
+
+
+### 9.2 Overall Performance
+
+![Overall Performance](overall.png)
+
+### 9.3 Time Analysis
+
+![time Performance](time.png)
+
+### 9.4 Product Performance
+
+![product Performance](product.png)
+
+### 9.5 Regional Performance
+
+![regional Performance](regional.png)
+
+### 9.6 Salesperson Performance
+
+![salesperson Performance](sales_per.png)
+
+### 9.7 Discount & Profitability
+
+![discount Performance](discount.png)
+
+### 9.8 Power BI File
+
+The complete Power BI report is available in the repository:
+
+**[Download Power BI Report](...)**
