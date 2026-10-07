@@ -1387,4 +1387,4 @@ regional performance, salesperson performance, and discount impact.
 
 The complete Power BI report is available in the repository:
 
-**[Download Power BI Report](...)**
+**[Download Power BI Report](project_one)**
