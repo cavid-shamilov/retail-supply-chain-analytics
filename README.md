@@ -27,7 +27,6 @@ The project follows a business-oriented analytical approach, starting with under
 - **Microsoft Excel** — Data validation, cleaning, Pivot Tables, KPI analysis, and exploratory analysis
 - **SQL Server / SSMS** — Data analysis and analytical queries
 - **Power BI** — Interactive dashboards and visualization
-- **PowerPoint** — Presentation of analytical findings and recommendations
 
 ---
 
@@ -1362,26 +1361,102 @@ regional performance, salesperson performance, and discount impact.
 ### 9.2 Overall Performance
 
 ![Overall Performance](overall.png)
+**Key Findings**
+
+- The business generated **$2.12M in total sales** and **$263.16K in total profit**, resulting in an overall **profit margin of 12.43%**.
+
+- Sales performance improved over the long term, increasing from **$455.03K in 2014** to **$657.71K in 2017**. After a **5.31% decline in 2015**, sales grew by **33.01% in 2016** and **14.77% in 2017**.
+
+- **Technology** was the leading category by sales, generating **$763.45K**, followed by **Furniture ($682.78K)** and **Office Supplies ($670.47K)**.
+
+- **Consumer** was the largest customer segment, contributing **$1.06M (49.89%)** of total sales, while Corporate and Home Office contributed **$654.23K (30.91%)** and **$406.45K (19.20%)**, respectively.
+
+- Monthly performance was relatively volatile, with **November generating the highest monthly sales ($253.08K)** and **December generating the highest monthly profit ($30.27K)**.
+
+- The overall **AOV was $449.12**, based on **4,713 orders** and **34,820 units sold**.
 
 ### 9.3 Time Analysis
 
 ![time Performance](time.png)
+**Key Findings**
+
+- Sales performance showed a mixed trend across the four-year period. Sales declined by **5.31% in 2015**, followed by a strong **33.01% increase in 2016** and a further **14.77% increase in 2017**.
+
+- **2017 was the strongest sales year**, generating **$657.71K** and accounting for approximately **31.07% of total company sales**.
+
+- Monthly sales showed noticeable **seasonal variation**. **November recorded the highest monthly sales at $253.08K**, while **February recorded the lowest at $119.00K**.
+
+- Monthly sales growth was **volatile**, with substantial month-over-month increases and declines across different years, indicating significant variation in short-term sales performance.
+
+- **2016 and 2017 together accounted for approximately 58.15% of total company sales**, highlighting the stronger sales contribution of the later years in the dataset.
 
 ### 9.4 Product Performance
 
 ![product Performance](product.png)
+**Key Findings**
+
+- **Technology generated the highest category sales at $763.45K**, followed by Furniture at $682.78K and Office Supplies at $670.47K.
+
+- The **Canon imageCLASS 2200 Advanced Copier** was the highest-selling individual product, generating **$47.60K** in sales. The Fellowes PB500 and Cisco TelePresence EX90 followed with **$27.45K** and **$22.64K**, respectively.
+
+- The **top 10 products generated approximately $227.03K in sales**, representing only **10.73% of total company sales**, indicating that sales were distributed across a broad product portfolio.
+
+- **Copiers generated the highest sub-category profit at $47.01K**, followed by Phones at $41.74K and Accessories at $39.07K.
+
+- **Tables was the largest loss-making sub-category**, generating **-$16.67K in profit** and an estimated **-8.78% profit margin**. Bookcases and Supplies also generated negative profit.
+
+- Profitability varied substantially across sub-categories. **Copiers achieved a 36.07% profit margin**, while Tables recorded a negative margin of **-8.78%**, highlighting significant differences in product-level profitability.
 
 ### 9.5 Regional Performance
 
 ![regional Performance](regional.png)
+**Key Findings**
+
+- **East generated the highest regional sales at $637.08K**, followed closely by West at $617.97K. Central and South generated $487.23K and $374.41K, respectively.
+
+- **West generated the highest regional profit at $88.76K**, slightly ahead of East at $86.54K. South generated $44.53K, while Central generated $43.34K.
+
+- **West achieved the highest profit margin at 14.36%**, followed by East at 13.58% and South at 11.89%. Central had the lowest margin at **8.90%**.
+
+- **East and West together contributed approximately 59.30% of total company sales**, indicating that these two regions represented the largest share of overall sales.
+
+- Regional performance differed in terms of both scale and profitability. **East led in sales, while West led in profit and profit margin**, indicating that the region with the highest sales was not necessarily the most profitable.
+
+- **Central showed a notable profitability gap**, generating $487.23K in sales but only $43.34K in profit, resulting in the lowest regional profit margin of 8.90%.
 
 ### 9.6 Salesperson Performance
 
 ![salesperson Performance](sales_per.png)
+**Key Findings**
+
+- **Chuck Magee generated the highest sales at $637.08K**, followed by Anna Andreadi at $617.97K. Kelly Williams and Cassandra Brandow generated $487.23K and $374.41K, respectively.
+
+- **Anna Andreadi generated the highest profit at $88.76K** and achieved the highest profit margin at **14.36%**, despite having slightly lower sales than Chuck Magee.
+
+- **Anna handled the highest number of orders with 1,422 orders**, while Chuck followed with 1,357 orders. Cassandra handled the fewest orders at 798.
+
+- **Chuck Magee achieved the highest AOV at $469.47**, slightly above Cassandra Brandow at $469.18. Anna and Kelly had lower AOVs of $434.58 and $428.90, respectively.
+
+- The salesperson with the highest sales was not the salesperson with the highest profitability. **Chuck led in sales, while Anna led in both total profit and profit margin**, highlighting the importance of evaluating sales performance alongside profitability.
+
+- **Kelly Williams had the lowest profit margin at 8.90% and the lowest AOV at $428.90**, indicating weaker profitability and average order value compared with the other salespeople.
 
 ### 9.7 Discount & Profitability
 
 ![discount Performance](discount.png)
+**Key Findings**
+
+- The overall average discount was **15.73%** across non-returned transactions.
+
+- Average profit was positive at discount levels up to **20%**, while it became negative at **30% and above**. The **50% discount level recorded the lowest average profit at approximately -$309.86 per transaction**.
+
+- Profitability generally declined as discount levels increased. Average profit margin was positive at lower discount levels but became negative from **30% discount onward**, reaching approximately **-54.20% at a 50% discount**.
+
+- Discount levels varied across categories. **Technology had the lowest average discount at 13.07%** and generated the highest total profit of **$131.46K**, while Furniture had the highest average discount at **17.71%** and generated only **$16.11K in total profit**.
+
+- Regional discount levels also showed differences. **West had the lowest average discount at 10.90% and the highest total profit at $88.76K**, while Central had the highest average discount at **23.79%** and the lowest regional profit margin at **8.90%**.
+
+- Several products combined **high discount levels with negative profit**, including products sold at discounts of **70%–80%**, indicating that aggressive discounting was frequently associated with poor profitability in these transactions.
 
 ### 9.8 Power BI File
 
